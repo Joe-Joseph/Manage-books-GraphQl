@@ -4,15 +4,18 @@ const schema = require('./schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const dotenv = require('dotenv');
 
 const app = express();
+
+dotenv.config();
 
 // Allow cross origin request
 
 app.use(cors())
 
 //Connect to MongoDB 
-mongoose.connect('mongodb+srv://Joseph:Joe123@graphql-app-db-elp4u.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGODB_URL);
 mongoose.connection.once('open', () => {
     console.log('Connected to database')
 })
